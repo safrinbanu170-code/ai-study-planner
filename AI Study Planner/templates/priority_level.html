@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Step 3 - Priority</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Step Indicator -->
+  <div class="step-box">
+    <div class="step-title">Step 3 of 3</div>
+    <div class="progress">
+      <div class="progress-bar step3"></div>
+    </div>
+  </div>
+
+  <h2>⚡ Priority Level</h2>
+  <p class="subtitle">Choose the difficulty level</p>
+
+  <form action="/priority" method="POST">
+
+    <input type="hidden" name="difficulty" id="difficulty">
+
+    <div class="card-group">
+      <div class="diff-card" data-value="Easy">
+        <h4>Easy</h4>
+        <p>Less workload, basic practice</p>
+      </div>
+
+      <div class="diff-card active" data-value="Medium">
+        <h4>Medium</h4>
+        <p>Balanced time and revision</p>
+      </div>
+
+      <div class="diff-card" data-value="Hard">
+        <h4>Hard</h4>
+        <p>More focus and extra revision</p>
+      </div>
+    </div>
+
+    <button type="submit">Generate Plan ✅</button>
+  </form>
+
+  <div class="btn-row">
+    <button type="button" class="secondary" onclick="history.back()">⬅ Back</button>
+    <button type="button" class="secondary" onclick="saveFormData(3)">💾 Save & Continue Later</button>
+  </div>
+
+  <div class="btn-row">
+    <button type="button" class="secondary danger" onclick="clearSavedData()">🗑 Clear Saved Data</button>
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='wizard.js') }}"></script>
+<script>
+  loadSavedData(3);
+
+  // Default: Medium
+  document.getElementById("difficulty").value = localStorage.getItem("difficulty") || "Medium";
+
+  const cards = document.querySelectorAll(".diff-card");
+
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      cards.forEach(c => c.classList.remove("active"));
+      card.classList.add("active");
+      document.getElementById("difficulty").value = card.dataset.value;
+      localStorage.setItem("difficulty", card.dataset.value);
+    });
+  });
+
+  // Make active based on saved
+  const saved = document.getElementById("difficulty").value;
+  cards.forEach(c => {
+    if(c.dataset.value === saved){
+      cards.forEach(x => x.classList.remove("active"));
+      c.classList.add("active");
+    }
+  });
+</script>
+
+</body>
+</html>
+
+

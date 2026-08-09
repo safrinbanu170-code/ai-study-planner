@@ -1,0 +1,398 @@
+/* ---------- RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- BODY ---------- */
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ---------- COMMON CONTAINER (ALL NORMAL PAGES) ---------- */
+.container {
+  width: 420px;                 /* 🔥 normal size */
+  max-width: 92%;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 30px 32px;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  animation: fadeUp 0.6s ease;
+}
+
+/* ---------- RESULT PAGE BIG BOX ONLY ---------- */
+.result-container {
+  width: 700px;                 /* 🔥 ONLY result page */
+  max-width: 96%;
+  padding: 48px 55px;
+  border-radius: 22px;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- HEADINGS ---------- */
+h2 {
+  text-align: center;
+  margin-bottom: 22px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+}
+
+h3 {
+  margin-top: 22px;
+  margin-bottom: 14px;
+  color: #333;
+}
+
+/* ---------- LABELS ---------- */
+label {
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* ---------- INPUTS ---------- */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: #667eea;
+}
+
+/* ---------- BUTTON ---------- */
+button {
+  width: 100%;
+  margin-top: 22px;
+  padding: 12px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+/* ---------- UNITS ---------- */
+.units-container {
+  margin-top: 10px;
+}
+
+.unit-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  background: #f4f6ff;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.unit-item input {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- TEXT ---------- */
+p {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* ---------- TABLE ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  font-size: 15px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+table th {
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  padding: 14px;
+}
+
+table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+table tr:nth-child(even) {
+  background: #f6f7ff;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 600px) {
+  .container {
+    width: 90%;
+  }
+
+  .result-container {
+    padding: 32px;
+  }
+}
+/* ---------- STUDENT PAGE BEAUTY ---------- */
+.student-container {
+  border: 2px solid rgba(118, 75, 162, 0.25);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(245, 240, 255, 0.95)
+  );
+}
+
+/* Subtitle text */
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #6b5ca5;
+  margin-bottom: 18px;
+}
+
+/* Input focus glow (purple) */
+.student-container input:focus {
+  border-color: #764ba2;
+  box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.25);
+}
+
+/* Button purple shine */
+.student-container button {
+  background: linear-gradient(135deg, #764ba2, #667eea);
+}
+
+.student-container button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(118, 75, 162, 0.35);
+}
+
+/* ---------- Wizard Step UI ---------- */
+.step-box {
+  margin-bottom: 18px;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.18);
+  padding: 8px 12px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.progress {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.progress-bar.step1 { width: 33%; }
+.progress-bar.step2 { width: 66%; }
+.progress-bar.step3 { width: 100%; }
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.secondary {
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.secondary:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.danger {
+  background: rgba(255, 0, 0, 0.25);
+}
+
+/* ✅ Save & Back buttons visible fix */
+.btn-row{
+  display:flex;
+  gap:12px;
+  margin-top:14px;
+}
+
+.secondary{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:800;
+
+  /* ✅ Make it clearly visible */
+  background:#ffffff;
+  color:#5c4db3;
+  border:2px solid rgba(118, 75, 162, 0.35);
+
+  box-shadow: 0 10px 18px rgba(0,0,0,0.10);
+}
+
+.secondary:hover{
+  background: rgba(118, 75, 162, 0.08);
+  border-color: rgba(118, 75, 162, 0.55);
+}
+
+/* ---------- INLINE MESSAGE BOX ---------- */
+.msg-box{
+  margin: 10px 0 16px;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  background: rgba(255, 0, 0, 0.10);
+  border: 1px solid rgba(255, 0, 0, 0.20);
+  color: #cc0000;
+}
+.hidden{ display:none; }
+
+/* ---------- HOURS SLIDER WRAP ---------- */
+.hours-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.hours-wrap input[type="range"]{
+  flex: 1;
+}
+.hrs-tag{
+  font-weight:800;
+  color:#555;
+}
+
+/* ---------- Unit tools ---------- */
+.unit-tools{
+  display:flex;
+  gap:10px;
+  margin: 10px 0 12px;
+}
+
+.mini-btn{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:12px;
+  font-weight:800;
+  cursor:pointer;
+  background: rgba(102,126,234,0.18);
+  color:#333;
+}
+
+.mini-btn:hover{
+  background: rgba(102,126,234,0.28);
+}
+
+.danger-mini{
+  background: rgba(255,0,0,0.14);
+}
+
+.danger-mini:hover{
+  background: rgba(255,0,0,0.22);
+}
+
+.unit-count{
+  text-align:center;
+  font-weight:900;
+  margin-bottom:12px;
+  color:#5c4db3;
+}
+
+/* ---------- Difficulty Cards ---------- */
+.card-group{
+  display:grid;
+  gap:12px;
+  margin-top:10px;
+}
+
+.diff-card{
+  padding:16px 14px;
+  border-radius:16px;
+  border:2px solid rgba(118,75,162,0.25);
+  background:#f7f7ff;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.diff-card h4{
+  margin-bottom:4px;
+  font-size:16px;
+}
+
+.diff-card p{
+  margin:0;
+  font-size:13px;
+  color:#666;
+}
+
+.diff-card:hover{
+  transform: translateY(-2px);
+}
+
+.diff-card.active{
+  border-color: rgba(118,75,162,0.7);
+  background: rgba(118,75,162,0.12);
+}
+
+
+
+
+
+
+
+
+
+

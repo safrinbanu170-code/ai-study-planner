@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Step 1 - Student & Exam</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Step Indicator -->
+  <div class="step-box">
+    <div class="step-title">Step 1 of 3</div>
+    <div class="progress">
+      <div class="progress-bar step1"></div>
+    </div>
+  </div>
+
+  <h2>🎓 Student & Exam Details</h2>
+  <p class="subtitle">Enter your details to generate a smart AI study plan</p>
+
+  <!-- ✅ Inline Validation Message -->
+  <div id="msgBox" class="msg-box hidden"></div>
+
+  <form id="step1Form" method="POST" novalidate>
+
+    <label for="name">Student Name</label>
+    <input type="text" id="name" name="name" placeholder="Eg: Safrin" required>
+
+    <label for="exam_date">Exam Date</label>
+    <input type="date" id="exam_date" name="exam_date" required>
+
+    <!-- ✅ Hours: Slider + Number -->
+    <label>Study Hours Per Day</label>
+
+    <div class="hours-wrap">
+      <input type="range" id="hoursRange" min="1" max="10" value="3">
+      <input type="number" id="hours" name="hours" min="1" max="10" value="3" required>
+      <span class="hrs-tag">hrs</span>
+    </div>
+
+    <button type="submit">Next ➜</button>
+  </form>
+
+  <div class="btn-row">
+    <button type="button" class="secondary" onclick="saveFormData(1)">💾 Save & Continue Later</button>
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='wizard.js') }}"></script>
+
+<script>
+  // ✅ Load saved data
+  loadSavedData(1);
+
+  // ✅ Block past date
+  const examDate = document.getElementById("exam_date");
+  const today = new Date().toISOString().split("T")[0];
+  examDate.setAttribute("min", today);
+
+  // ✅ Slider + Number sync
+  const hoursRange = document.getElementById("hoursRange");
+  const hoursInput = document.getElementById("hours");
+
+  hoursRange.addEventListener("input", () => hoursInput.value = hoursRange.value);
+  hoursInput.addEventListener("input", () => hoursRange.value = hoursInput.value);
+
+  // ✅ Inline validation
+  const form = document.getElementById("step1Form");
+  const msgBox = document.getElementById("msgBox");
+
+  function showMsg(text) {
+    msgBox.textContent = text;
+    msgBox.classList.remove("hidden");
+  }
+
+  function hideMsg() {
+    msgBox.classList.add("hidden");
+    msgBox.textContent = "";
+  }
+
+  form.addEventListener("submit", function(e){
+    hideMsg();
+
+    const name = document.getElementById("name").value.trim();
+    const date = examDate.value;
+    const hours = Number(hoursInput.value);
+
+    if(name.length < 2){
+      e.preventDefault();
+      showMsg("⚠️ Please enter a valid student name.");
+      return;
+    }
+
+    if(!date){
+      e.preventDefault();
+      showMsg("⚠️ Please select the exam date.");
+      return;
+    }
+
+    if(date < today){
+      e.preventDefault();
+      showMsg("⚠️ Past exam date is not allowed.");
+      return;
+    }
+
+    if(hours < 1 || hours > 10){
+      e.preventDefault();
+      showMsg("⚠️ Study hours must be between 1 and 10.");
+      return;
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

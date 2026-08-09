@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Study Planner Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container result-container">
+
+  <h2>AI Study Planner Result</h2>
+
+  <p><b>Name:</b> {{ name }}</p>
+  <p><b>Subject:</b> {{ subject }}</p>
+  <p><b>Expected Score:</b> {{ score }} / 75</p>
+
+  <hr>
+
+  <h3>📅 Date-wise Study Timetable</h3>
+
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Unit</th>
+      <th>Study Time</th>
+    </tr>
+
+    {% for row in timetable %}
+    <tr>
+      <td>{{ row.date }}</td>
+      <td>{{ row.unit }}</td>
+      <td>{{ row.time }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+</div>
+
+</body>
+</html>
+
+

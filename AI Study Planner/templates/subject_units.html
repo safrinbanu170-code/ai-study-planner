@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Step 2 - Subject & Units</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Step Indicator -->
+  <div class="step-box">
+    <div class="step-title">Step 2 of 3</div>
+    <div class="progress">
+      <div class="progress-bar step2"></div>
+    </div>
+  </div>
+
+  <h2>📚 Subject & Units</h2>
+  <p class="subtitle">Choose your subject and units</p>
+
+  <!-- ✅ Count display -->
+  <div class="unit-count" id="unitCount">0 Units Selected</div>
+
+  <!-- ✅ Inline message -->
+  <div id="msgBox" class="msg-box hidden"></div>
+
+  <form id="step2Form" action="/subject" method="POST" novalidate>
+
+    <label for="subject">Subject Name</label>
+    <input type="text" id="subject" name="subject" placeholder="Eg: Quantitative Aptitude" required>
+
+    <label>Units</label>
+
+    <!-- ✅ Select all / Clear all -->
+    <div class="unit-tools">
+      <button type="button" class="mini-btn" id="selectAllBtn">Select All</button>
+      <button type="button" class="mini-btn danger-mini" id="clearAllBtn">Clear All</button>
+    </div>
+
+    <div class="units-container" id="unitsBox">
+      <div class="unit-item"><input type="checkbox" name="units" value="Unit 1"> <span>Unit 1</span></div>
+      <div class="unit-item"><input type="checkbox" name="units" value="Unit 2"> <span>Unit 2</span></div>
+      <div class="unit-item"><input type="checkbox" name="units" value="Unit 3"> <span>Unit 3</span></div>
+      <div class="unit-item"><input type="checkbox" name="units" value="Unit 4"> <span>Unit 4</span></div>
+      <div class="unit-item"><input type="checkbox" name="units" value="Unit 5"> <span>Unit 5</span></div>
+    </div>
+
+    <button type="submit">Next ➜</button>
+  </form>
+
+  <div class="btn-row">
+    <button type="button" class="secondary" onclick="history.back()">⬅ Back</button>
+    <button type="button" class="secondary" onclick="saveFormData(2)">💾 Save & Continue Later</button>
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='wizard.js') }}"></script>
+<script>
+  loadSavedData(2);
+
+  const unitCount = document.getElementById("unitCount");
+  const checkboxes = document.querySelectorAll("input[name='units']");
+  const selectAllBtn = document.getElementById("selectAllBtn");
+  const clearAllBtn = document.getElementById("clearAllBtn");
+
+  const msgBox = document.getElementById("msgBox");
+  function showMsg(text){
+    msgBox.textContent = text;
+    msgBox.classList.remove("hidden");
+  }
+  function hideMsg(){
+    msgBox.textContent = "";
+    msgBox.classList.add("hidden");
+  }
+
+  function updateCount(){
+    const selected = document.querySelectorAll("input[name='units']:checked").length;
+    unitCount.textContent = `${selected} Units Selected`;
+  }
+
+  // on load
+  updateCount();
+
+  // checkbox change
+  checkboxes.forEach(cb => cb.addEventListener("change", updateCount));
+
+  // select all
+  selectAllBtn.addEventListener("click", () => {
+    checkboxes.forEach(cb => cb.checked = true);
+    updateCount();
+  });
+
+  // clear all
+  clearAllBtn.addEventListener("click", () => {
+    checkboxes.forEach(cb => cb.checked = false);
+    updateCount();
+  });
+
+  // validation: must select at least 1 unit
+  document.getElementById("step2Form").addEventListener("submit", (e) => {
+    hideMsg();
+    const selected = document.querySelectorAll("input[name='units']:checked").length;
+
+    if(selected === 0){
+      e.preventDefault();
+      showMsg("⚠️ Please select at least 1 unit.");
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
+
